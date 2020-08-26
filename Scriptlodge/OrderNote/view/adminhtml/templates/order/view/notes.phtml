@@ -1,0 +1,89 @@
+<?php
+$orderId = $block->getOrderId();
+$note = trim($block->getOrderNote());
+$noteUrl = $block->getNoteUrl();
+$isAllowedToAddNote = $block->getIsAllowedToAddNote();
+$label = __('Add');
+if ($note) {
+    $label = __('Edit');
+}
+//$link = sprintf('<a href="%s">%s</a>', $noteUrl, $label);
+?>
+<?php if ($isAllowedToAddNote) { ?>
+
+    <section class="admin__page-section ordernote">
+        <div class="admin__page-section-title">
+            <span class="title"><?= $block->escapeHtml(__('Order Note')) ?></span>
+            <div class="actions note-link" style="padding: 5px;"><a href="javascript:;"><?= $label; ?></a></div>
+        </div>
+
+        <div class="admin__page-section-content admin__field-control input" id="input-box" style="display: none;">
+                <textarea id="order_note" name="order_note" rows="3" cols="5" class="admin__control-textarea" style="width: 50%"></textarea>
+            <div class="admin__page-section-content actions" style="padding: 10px 0;">
+                <button id="note_submit" class="action-default scalable action-save action-secondary"
+                        type="button"><?= $block->escapeHtml(__('Save note')) ?></button>
+            </div>
+        </div>
+
+        <div class="admin__page-section-content text-note" id="text-note">
+            <?php
+            if ($note) {
+                echo $note;
+                } else {
+                echo $block->escapeHtml(__('No note for this order'));
+                }
+            ?>
+        </div>
+
+
+        <script>// <![CDATA[
+            require([
+                'jquery',
+                'jquery/ui',
+                //'Magento_Checkout/js/model/url-builder',
+                'mage/url'
+            ], function ($, ui, urlFormatter) {
+                'use strict';
+                var ajaxRequest;
+
+
+                $(document).on('click', '#note_submit', function () {
+                    var orderId =<?php echo $orderId; ?>;
+                    var order_note = $('#order_note').val();
+
+                    ajaxRequest = jQuery.ajax({
+                        url: "<?php echo $noteUrl; ?>",
+                        type: 'post',
+                        data: {order_id: orderId, note: order_note, form_key: FORM_KEY},
+                        dataType: 'json',
+                        beforeSend: function () {
+                            // jQuery('#loader').show();
+                        }
+                    });
+
+                    //Show successfully for submit message
+                    ajaxRequest.done(function (response, textStatus, jqXHR) {
+                        if (response.error == false) {
+                            $('#text-note').html(order_note);
+                        } else {
+                            alert(response.message);
+                        }
+                        // jQuery('#loader').hide();
+                    });
+                    ajaxRequest.fail(function () {
+                        alert('Oops, An error occured, please try again later!');
+                    });
+                });
+
+                $(".actions.note-link").on("click", function (event) {
+                    $('#input-box').slideToggle(200);
+                });
+
+
+            });
+            // ]]>
+        </script>
+    </section>
+<?php } ?>
+
+

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Scriptlodge. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Scriptlodge\OrderNote\Api\Data\OrderNoteInterface"
+                type="Scriptlodge\OrderNote\Model\Data\OrderNote" />
+    <preference for="Scriptlodge\OrderNote\Api\OrderNoteManagementInterface"
+                type="Scriptlodge\OrderNote\Model\OrderNoteManagement" />
+    <preference for="Scriptlodge\OrderNote\Api\GuestOrderNoteManagementInterface"
+                type="Scriptlodge\OrderNote\Model\GuestOrderNoteManagement" />
+</config>

@@ -1,0 +1,16 @@
+<?php
+/** @var \Scriptlodge\OrderNote\Block\Order\Note $block */
+
+?>
+<?php if ($block->isShowNoteInAccount()): ?>
+    <?php if ($note = $block->getOrderNote()): ?>
+    <div class="box box-order-note">
+            <div class="box-title">
+                <strong><?= $block->escapeHtml(__('Order note')) ?></strong>
+            </div>
+            <div class="box-content">
+                <?= $block->getOrderNoteHtml(); ?>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

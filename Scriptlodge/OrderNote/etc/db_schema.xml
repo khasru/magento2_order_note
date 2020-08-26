@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category Scriptlodge
+ * @package Scriptlodge_OrderNote
+ * @author Khasru Miah <khasru96@gmail.com >
+ * @copyright Copyright (c) 2018 , Ltd (http://www.scriptlodge.com)
+ * @license http://opensource.org/licenses/afl-3.0.php Academic Free License (AFL 3.0)
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="sales_order" resource="sales" engine="innodb" comment="Sales Order">
+        <column xsi:type="text" name="order_note" nullable="true"  comment="order note"/>
+    </table>
+    <table name="quote" resource="checkout" engine="innodb" comment="Sales quote">
+        <column xsi:type="text" name="order_note" nullable="true"  comment="order note"/>
+    </table>
+    <table name="quote_item" resource="checkout" engine="innodb" comment="Sales quote Item ">
+        <column xsi:type="smallint" name="internal_order_note" padding="5" default="0" unsigned="true"  comment="internal order note"/>
+    </table>
+
+</schema>

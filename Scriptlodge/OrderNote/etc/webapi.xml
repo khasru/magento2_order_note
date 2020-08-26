@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Scriptlodge. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- Managing checkout order note -->
+    <route url="/V1/guest-carts/:cartId/setordernote" method="PUT">
+        <service class="Scriptlodge\OrderNote\Api\GuestOrderNoteManagementInterface"
+                 method="saveOrderNote"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <!-- Managing checkout order note -->
+    <route url="/V1/carts/mine/setordernote" method="PUT">
+        <service class="Scriptlodge\OrderNote\Api\OrderNoteManagementInterface"
+                 method="saveOrderNote"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+
+    <route url="/V1/sales/note/setordernote" method="PUT">
+        <service class="Scriptlodge\OrderNote\Api\OrderNoteManagementInterface"
+                 method="saveOrderNoteAdmin"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+</routes>

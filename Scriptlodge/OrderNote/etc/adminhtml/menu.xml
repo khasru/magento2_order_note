@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+    	<add id="Scriptlodge_OrderNote::ordernote_add" title="Order Note" module="Scriptlodge_OrderNote" sortOrder="10"  action="ordernote/note/edit" resource="Scriptlodge_OrderNote::order_note" />
+    </menu>
+</config>
